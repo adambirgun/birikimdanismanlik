@@ -174,14 +174,14 @@
     });
   }
 
-  var langSelect = document.querySelector(".lang-switch");
-  if (langSelect) {
+  var langSwitch = document.querySelector(".lang-switch");
+  if (langSwitch) {
     try {
       localStorage.setItem("birikimedu_lang", lang);
     } catch (err) {
       /* ignore */
     }
-    langSelect.querySelectorAll("a[data-lang]").forEach(function (link) {
+    langSwitch.querySelectorAll("a[data-lang]").forEach(function (link) {
       link.addEventListener("click", function () {
         try {
           localStorage.setItem("birikimedu_lang", link.getAttribute("data-lang") || lang);
@@ -189,6 +189,13 @@
           /* ignore */
         }
       });
+    });
+    document.addEventListener("click", function (event) {
+      if (!langSwitch.open) return;
+      if (!langSwitch.contains(event.target)) langSwitch.open = false;
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && langSwitch.open) langSwitch.open = false;
     });
   }
 
