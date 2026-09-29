@@ -174,32 +174,52 @@ textarea {
 .lang-switch {
   flex-shrink: 0;
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 2px;
+  margin: 0;
 }
 
-.lang-switch select {
-  appearance: none;
-  -webkit-appearance: none;
+.lang-switch a {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--color-midnight-ink);
-  background: var(--color-cream-paper)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23000609' d='M1 1l5 5 5-5'/%3E%3C/svg%3E")
-    no-repeat right 10px center;
-  border: 1px solid rgba(26, 28, 30, 0.28);
-  border-radius: var(--radius-pill);
-  padding: 8px 28px 8px 12px;
-  cursor: pointer;
-  line-height: 1.2;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  padding: 8px 9px;
+  color: rgba(26, 28, 30, 0.55);
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  text-decoration: none;
 }
 
-.lang-switch select:hover,
-.lang-switch select:focus {
-  border-color: var(--color-signal-blue);
+.lang-switch a:hover {
   color: var(--color-signal-blue);
-  outline: none;
+}
+
+.lang-switch a.is-active {
+  color: var(--color-signal-blue);
+}
+
+.lang-switch a:not(:last-child)::after {
+  content: none;
+}
+
+.lang-switch a + a {
+  position: relative;
+}
+
+.lang-switch a + a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 1px;
+  height: 12px;
+  margin-top: -6px;
+  background: rgba(26, 28, 30, 0.14);
+  pointer-events: none;
 }
 
 .ghost-link {
@@ -1108,6 +1128,13 @@ textarea {
     margin-left: auto;
     position: relative;
     z-index: 53;
+    max-width: min(220px, 52vw);
+    justify-content: flex-end;
+  }
+
+  .lang-switch a {
+    padding: 6px 7px;
+    font-size: 12px;
   }
 
   .logo {

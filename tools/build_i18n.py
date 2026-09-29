@@ -68,6 +68,11 @@ def page_url(lang: str, page: str) -> str:
 
 
 def href_to(target_lang: str, page: str, from_lang: str) -> str:
+    """Relative URL to the same logical page in another language."""
+    if page == "index.html":
+        if from_lang == "tr":
+            return "./" if target_lang == "tr" else f"{target_lang}/"
+        return "../" if target_lang == "tr" else f"../{target_lang}/"
     if from_lang == "tr":
         return page if target_lang == "tr" else f"{target_lang}/{page}"
     if target_lang == "tr":
@@ -82,12 +87,19 @@ def hreflang(page: str) -> str:
 
 
 def lang_switch(lang: str, page: str, label: str) -> str:
-    opts = []
+    """Nav-style language links (no <select>) — matches Earlydog header, works without JS."""
+    parts = []
     for code, name in [("tr", "TR"), ("en", "EN"), ("es", "ES"), ("de", "DE"), ("fr", "FR"), ("ru", "RU")]:
-        sel = " selected" if code == lang else ""
-        opts.append(f'<option value="{href_to(code, page, lang)}"{sel}>{name}</option>')
-    return f"""<label class="lang-switch"><span class="sr-only">{e(label)}</span>
-        <select id="lang-select" data-lang="{lang}" aria-label="{e(label)}">{''.join(opts)}</select></label>"""
+        href = href_to(code, page, lang)
+        active = ' class="is-active" aria-current="true"' if code == lang else ""
+        parts.append(
+            f'<a href="{href}" hreflang="{code}" lang="{code}" data-lang="{code}"{active}>{name}</a>'
+        )
+    return (
+        f'<nav class="lang-switch" aria-label="{e(label)}">'
+        + "".join(parts)
+        + "</nav>"
+    )
 
 
 def header(t: dict, lang: str, page: str, active: str, ghost_href: str | None = None, ghost_text: str | None = None) -> str:
@@ -171,6 +183,7 @@ def head_common(lang: str, page: str, title: str, description: str, a: str, extr
   <meta name="description" content="{e(description)}">
   <link rel="canonical" href="{page_url(lang, page)}">
   <meta name="robots" content="{rob}">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#fff9f0">
 {hreflang(page)}
   <meta property="og:type" content="website">

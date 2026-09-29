@@ -111,6 +111,24 @@ Her zone (veya Pages):
 
 Pages, repodaki `_headers` dosyasını uygular (CSP, X-Frame-Options vb.).
 
+**GitHub Pages kullanıyorsanız** `_headers` uygulanmaz. Cloudflare DNS (turuncu bulut) açıksa şu Transform Rule’ları ekleyin (birikimedu.com zone):
+
+1. **Rules → Transform Rules → Modify Response Header → Create rule**
+2. Rule name: `Security headers`
+3. When: `All incoming requests` (veya hostname = `birikimedu.com` / `www.birikimedu.com`)
+4. Then set:
+
+| Header | Value |
+|--------|--------|
+| `X-Frame-Options` | `DENY` |
+| `X-Content-Type-Options` | `nosniff` |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` |
+| `Permissions-Policy` | `accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()` |
+| `Strict-Transport-Security` | `max-age=31536000; includeSubDomains; preload` |
+| `Content-Security-Policy` | `default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' mailto:; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' blob:; connect-src 'self'; upgrade-insecure-requests` |
+
+Ayrıca: **Scrape Shield / Email Address Obfuscation** açık olabilir (CF). **Bot Fight Mode** (ücretsiz) önerilir. Admin paneli / API anahtarı bu sitede yok — statik site.
+
 ### 7) E-posta (Cloudflare Email Routing)
 
 Sadece **birikimedu.com** üzerinde yeterli (diğerleri yönleniyorsa):

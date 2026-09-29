@@ -174,25 +174,21 @@
     });
   }
 
-  var langSelect = document.getElementById("lang-select");
+  var langSelect = document.querySelector(".lang-switch");
   if (langSelect) {
     try {
       localStorage.setItem("birikimedu_lang", lang);
     } catch (err) {
       /* ignore */
     }
-    langSelect.addEventListener("change", function () {
-      var next = langSelect.value;
-      if (!next) return;
-      try {
-        var opt = langSelect.options[langSelect.selectedIndex];
-        var code = (opt && opt.textContent) || "";
-        var map = { TR: "tr", EN: "en", ES: "es", DE: "de", FR: "fr", RU: "ru" };
-        if (map[code]) localStorage.setItem("birikimedu_lang", map[code]);
-      } catch (err2) {
-        /* ignore */
-      }
-      window.location.href = next;
+    langSelect.querySelectorAll("a[data-lang]").forEach(function (link) {
+      link.addEventListener("click", function () {
+        try {
+          localStorage.setItem("birikimedu_lang", link.getAttribute("data-lang") || lang);
+        } catch (err2) {
+          /* ignore */
+        }
+      });
     });
   }
 

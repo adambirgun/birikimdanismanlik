@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /tools/
+Disallow: /README.md
+Disallow: /docs/
 
 Sitemap: https://birikimedu.com/sitemap.xml
