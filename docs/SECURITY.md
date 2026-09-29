@@ -4,12 +4,16 @@ Statik site: sunucu tarafı form işleyici, oturum veya veritabanı yok.
 
 ## Zaten uygulananlar
 - Form yalnızca `mailto:` (üçüncü taraf formşaj aktarımı yok)
-- CSP / güvenlik başlıkları: `_headers` (Cloudflare Pages) + Cloudflare Transform Rules (GH Pages + proxy)
+- CSP / güvenlik başlıkları: `_headers` (Cloudflare Pages) + Cloudflare Transform Rules (GH Pages + proxy) — **GH Pages tek başına `_headers` okumaz; CF kuralı zorunlu**
 - `Referrer-Policy` meta
 - `robots.txt`: `/tools/`, `/docs/`, `/README.md` yasak
 - `.well-known/security.txt`
 - HSTS (proxy / Pages üzerinden)
 - Clickjacking: `X-Frame-Options: DENY`, `frame-ancestors 'none'`
+- `/tools` derleme betikleri canlı repoda yok (yalnızca lokal)
+
+## Cloudflare’de hemen açın (GH Pages kullanıyorsanız)
+`docs/CLOUDFLARE.md` içindeki **Transform Rules** tablosunu uygulayın. Aksi halde CSP / XFO / HSTS yanıt başlığında görünmez.
 
 ## Site sahibi kontrol listesi
 - [ ] Cloudflare SSL: Full (strict), Always HTTPS
