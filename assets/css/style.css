@@ -171,6 +171,37 @@ textarea {
   display: none;
 }
 
+.lang-switch {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.lang-switch select {
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-midnight-ink);
+  background: var(--color-cream-paper)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23000609' d='M1 1l5 5 5-5'/%3E%3C/svg%3E")
+    no-repeat right 10px center;
+  border: 1px solid rgba(26, 28, 30, 0.28);
+  border-radius: var(--radius-pill);
+  padding: 8px 28px 8px 12px;
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.lang-switch select:hover,
+.lang-switch select:focus {
+  border-color: var(--color-signal-blue);
+  color: var(--color-signal-blue);
+  outline: none;
+}
+
 .ghost-link {
   font-family: var(--font-body);
   font-size: 16px;
@@ -1073,9 +1104,16 @@ textarea {
     display: none;
   }
 
+  .lang-switch {
+    margin-left: auto;
+    position: relative;
+    z-index: 53;
+  }
+
   .logo {
     position: relative;
     z-index: 53;
+    margin-right: 0;
   }
 
   .nav-toggle {
