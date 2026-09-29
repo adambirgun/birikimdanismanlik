@@ -13,3 +13,7 @@ __pycache__/
 *.ai
 *.mov
 *.mkv
+
+# keep i18n generators local-only
+tools/
+
