@@ -25,17 +25,19 @@ Pages önizleme: `https://adambirgun.github.io/birikimdanismanlik/`
 
 1. [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**
 2. GitHub: `adambirgun/birikimdanismanlik` (veya repo adınız)
-3. Ayarlar:
+3. Ayarlar (dashboard — bu hatalı ayar deploy’u kırar):
 
-| Alan | Değer |
-|------|--------|
-| Production branch | `main` (veya `master`) |
-| Framework preset | **None** |
-| Build command | *(boş)* |
-| Build output directory | `/` (kök; `index.html` kökte olmalı) |
-| Root directory | *(boş — repo kökü site ise)* |
+| Alan | Doğru değer | Yanlış (kaçın) |
+|------|-------------|----------------|
+| Production branch | `main` | — |
+| Framework preset | **None** | Next/Nuxt vb. |
+| Build command | *(boş)* | `npm run build` |
+| **Build output directory** | `/` veya `.` | `index.html` ← **bu hata log’daki sebep** |
+| **Root directory** | *(boş)* | `v2` ← repo kökünde zaten site var; `v2/` klasörü yok |
 
-> Site dosyaları `v2/` içindeyse: **Root directory** = `v2`
+> Log’da `Output directory "index.html" not found` görürseniz: Pages → **Settings → Builds & deployments → Build configuration** → Output directory = `/` yapıp **Retry deployment**.
+
+Repoda `wrangler.toml` ile `pages_build_output_dir = "."` tanımlıdır; dashboard yine `/` olmalı.
 
 4. **Save and Deploy** — ilk deploy bitsin.
 
