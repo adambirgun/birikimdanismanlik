@@ -1,19 +1,8 @@
-.DS_Store
-Thumbs.db
-desktop.ini
-*.tmp
-*.log
-.vscode/
-.idea/
-_fix_paths.py
-__pycache__/
-
-# Large local media drafts (keep published files tracked)
-*.psd
-*.ai
-*.mov
-*.mkv
-
-# keep i18n generators local-only
+﻿# Local / sensitive / non-public site surface
+docs/
 tools/
-
+README.md
+*.md
+!assets/**/README.md
+beni oku.txt
+.gitignore.bak
