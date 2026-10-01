@@ -4,8 +4,3 @@ gitignore
 *.bak
 .DS_Store
 Thumbs.db
-
-*.7z
-*.zip
-*.rar
-
