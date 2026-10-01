@@ -1,8 +1,6 @@
-﻿# Local / sensitive / non-public site surface
-docs/
-tools/
-README.md
-*.md
-!assets/**/README.md
+﻿# Local archive helpers (not for public GitHub Pages tree)
 beni oku.txt
-.gitignore.bak
+gitignore
+*.bak
+.DS_Store
+Thumbs.db
